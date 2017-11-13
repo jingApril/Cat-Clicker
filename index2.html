@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style>
+    div {
+        padding: 12px;
+        background: red;
+        margin: 12px;
+    }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+    document.body.innerHTML = '';
+    document.body.style.background = 'white';
+
+    var nums = [1, 2, 3, 4, 5];
+
+
+    for (var i = 0; i < nums.length; i++) {
+        var num = nums[i];
+        var elem = document.createElement('div');
+        elem.textContent = num;
+
+        elem.addEventListener('click', (function(numCopy) {
+            return function() {
+                alert(numCopy);
+            };
+        })(num));
+
+        document.body.appendChild(elem);
+    };
+    </script>
+</body>
+
+</html>

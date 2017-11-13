@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style>
+    img {
+        width: 200px;
+        height: 150px;
+        margin: 12px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    span {
+        color: red;
+        font-weight: bold;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="cat-click">
+        <img class="cat1" src="cat1.jpg" alt="cat1" title="cat1">
+        <img class="cat2" src="cat2.jpg" alt="cat2" title="cat2">
+        <img class="cat3" src="cat3.jpg" alt="cat3" title="cat3">
+        <img class="cat4" src="cat4.jpg" alt="cat4" title="cat4">
+        <img class="cat5" src="cat5.jpg" alt="cat5" title="cat5">
+        <img class="cat6" src="cat6.jpg" alt="cat6" title="cat6">
+    </div>
+    <p>
+
+    </p>
+    <script>
+
+    	var cat =[cat1, cat2, cat3, cat4, cat5]
+
+    for (var i = 0; i < 5; i++) {
+
+  $('span:last').before($('.cat2').attr('title'));
+
+    };
+
+
+    var i = 0;
+    var j = 0;
+    $('span:first').before($('.cat1').attr('title'));
+    $('span:last').before($('.cat2').attr('title'));
+
+    $('#cat-click').on('click', '.cat1', function() {
+        i++;
+        $('span:first').text(i);
+    });
+    $('#cat-click').on('click', '.cat2', function() {
+        j++;
+        $('span:last').text(j);
+    });
+    </script>
+</body>
+
+</html>
