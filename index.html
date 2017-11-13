@@ -29,25 +29,22 @@
 
 <body>
     <div id="cat-click">
-        <img class="cat1" src="cat1.jpg" alt="cat1" title="cat1">
-        <img class="cat2" src="cat2.jpg" alt="cat2" title="cat2">
-        <img class="cat3" src="cat3.jpg" alt="cat3" title="cat3">
-        <img class="cat4" src="cat4.jpg" alt="cat4" title="cat4">
-        <img class="cat5" src="cat5.jpg" alt="cat5" title="cat5">
-        <img class="cat6" src="cat6.jpg" alt="cat6" title="cat6">
+       <div>
+	       <img class="cat1" src="cat1.jpg" alt="cat1" title="cat1">
+	        <h2></h2>
+	        <span></span>
+       </div>
     </div>
-    <p>
-
-    </p>
     <script>
 
-    	var cat =[cat1, cat2, cat3, cat4, cat5]
+    var cat =['cat1', 'cat2', 'cat3', 'cat4', 'cat5'];
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 1; i < cat.length + 1; i++) {
 
-  $('span:last').before($('.cat2').attr('title'));
+      elem = '<div><img class="'+ cat[i] +'"src="'+ cat[i]+ '.jpg" alt="' + cat[i] +'" title="' + cat[i] +'"><h2></h2><span></span></div>';
+	  $('#cat-click').append(elem);
 
-    };
+	  };
 
 
     var i = 0;
