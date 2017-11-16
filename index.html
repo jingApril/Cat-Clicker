@@ -9,10 +9,17 @@
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
     <style>
+    #cat-click div {
+        width: 15%;
+        margin: 1%;
+        display: inline;
+        float: left;
+    }
+
     img {
-        width: 200px;
+        width: 100%;
         height: 150px;
-        margin: 12px;
+        cursor: pointer;
     }
 
     p {
@@ -29,37 +36,33 @@
 
 <body>
     <div id="cat-click">
-       <div>
-	       <img class="cat1" src="cat1.jpg" alt="cat1" title="cat1">
-	        <h2></h2>
-	        <span></span>
-       </div>
+        <!--         <div class="cat1" >
+    <img src="cat1.jpg" alt="cat1" title="cat1">
+    <h2></h2>
+    <span></span>
+</div> -->
     </div>
     <script>
+    var cat = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5'];
 
-    var cat =['cat1', 'cat2', 'cat3', 'cat4', 'cat5'];
+    function catShow() {
 
-    for (var i = 1; i < cat.length + 1; i++) {
+        for (var i = 0; i < cat.length; i++) {
+            elem = '<div class="' + cat[i] + '"><img src="' + cat[i] + '.jpg" alt="' + cat[i] + '" title="' + cat[i] + '"><h2>' + cat[i] + '</h2><span>' + num  + ' </span></div>';
+	        	var num = 0;
+	        $('.cat' + i).on('click', 'img', function(){
 
-      elem = '<div><img class="'+ cat[i] +'"src="'+ cat[i]+ '.jpg" alt="' + cat[i] +'" title="' + cat[i] +'"><h2></h2><span></span></div>';
-	  $('#cat-click').append(elem);
+	        	num++;
+	        	return num;
+	        });
 
-	  };
+            $('#cat-click').append(elem);
+        };
+
+    }
 
 
-    var i = 0;
-    var j = 0;
-    $('span:first').before($('.cat1').attr('title'));
-    $('span:last').before($('.cat2').attr('title'));
-
-    $('#cat-click').on('click', '.cat1', function() {
-        i++;
-        $('span:first').text(i);
-    });
-    $('#cat-click').on('click', '.cat2', function() {
-        j++;
-        $('span:last').text(j);
-    });
+    catShow();
     </script>
 </body>
 

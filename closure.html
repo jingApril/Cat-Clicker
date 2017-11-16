@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>closure inside loops</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+    var funcs = [];
+
+    for (var i = 0; i < 3; i++) { // let's create 3 functions
+        funcs[i] = function() { // and store them in funcs
+            console.log("My value: " + i); // each should log its value.
+        };
+    }
+
+
+
+    /*for (var j = 0; j < 3; j++) {
+      funcs[j]();                      // and now let's run each one to see
+    }*/
+    // funcs[0]();
+    //
+
+    /*Example 4*/
+    function sayHello2(name) {
+        var text = 'Hello ' + name; // Local variable
+        var say = function() { console.log(text); }
+        return say;
+    }
+    var say2 = sayHello2('Bob');
+    say2(); // logs "Hello Bob"
+
+
+    function say667() {
+        var num = 42;
+
+        var say = function() { console.log(num); }
+        num = num + 2;
+
+        return say;
+    }
+
+    var sayNumber = say667();
+    sayNumber();
+
+
+
+    /*Example 5*/
+
+/*    function buildList(list) {
+        var result = [];
+        for (var i = 0; i < list.length; i++) {
+            var item = 'item' + i;
+            result.push(function() { console.log(item + ' ' + list[i]) });
+        }
+        return result;
+    }
+
+    function testList() {
+        var fnlist = buildList([1, 2, 3]);
+        for (var j = 0; j < fnlist.length; j++) {
+            fnlist[j]();
+        }
+    }
+
+    testList() */
+
+
+    /*Example 6*/
+    function sayAlice() {
+        var say = function() { console.log(alice);}
+        // Local variable that ends up within closure
+        var alice = 'Hello Alice';
+        return say;
+        //console.log(say);
+    }
+    sayAlice()(); // logs "Hello Alice"
+
+    </script>
+</body>
+
+</html>
