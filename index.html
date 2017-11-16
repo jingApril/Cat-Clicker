@@ -9,24 +9,43 @@
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
     <style>
-    #cat-click div {
-        width: 15%;
-        margin: 1%;
-        display: inline;
+    #cat-click {
+        width: 20%;
         float: left;
+    }
+
+    #cat-click div {
+        width: 100%;
+        display: block;
+        background: green;
+        text-align: center;
+        margin: 4% 0;
+    }
+
+    #cat-click div:hover {
+        cursor: pointer;
+    }
+
+    .catshow {
+        width: 40%;
+        float: left;
+        margin-left: 10%;
     }
 
     img {
         width: 100%;
-        height: 150px;
+        height: 250px;
+        /* margin: 12px; */
+        display: inline;
         cursor: pointer;
     }
 
-    p {
-        font-size: 16px;
+    h2 {
+        width: 100%;
     }
 
     span {
+        width: 100%;
         color: red;
         font-weight: bold;
     }
@@ -36,33 +55,42 @@
 
 <body>
     <div id="cat-click">
-        <!--         <div class="cat1" >
-    <img src="cat1.jpg" alt="cat1" title="cat1">
-    <h2></h2>
-    <span></span>
-</div> -->
+        <!-- <div><img class="cat1" src="cat1.jpg" alt="cat1" title="cat1"> <h2></h2><span></span></div> -->
+<!--         <div class="cat1">cat1</div>
+        <div class="cat2">cat2</div>
+        <div class="cat3">cat3</div>
+        <div class="cat3">cat4</div>
+        <div class="cat3">cat5</div> -->
+    </div>
+    <div class="catshow">
     </div>
     <script>
-    var cat = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5'];
+    var cats = $(".catshow");
+    var catNO = $("#cat-click");
 
-    function catShow() {
-
-        for (var i = 0; i < cat.length; i++) {
-            elem = '<div class="' + cat[i] + '"><img src="' + cat[i] + '.jpg" alt="' + cat[i] + '" title="' + cat[i] + '"><h2>' + cat[i] + '</h2><span>' + num  + ' </span></div>';
-	        	var num = 0;
-	        $('.cat' + i).on('click', 'img', function(){
-
-	        	num++;
-	        	return num;
-	        });
-
-            $('#cat-click').append(elem);
-        };
-
+    function catNOlist(){
+        for (var i = 1; i < 6; i++) {
+            catNO.append('<div class="cat' + [i] + '">cat' + i + '</div>')
+        }
     }
+    catNOlist();
+
+    $("#cat-click").on('click', 'div', function() {
+        var whichcat = $(this).text();
+        //var s =0;
+        var num = 0;
+        elem = '<img src="' + whichcat + '.jpg" alt="' + whichcat + '" title="' + whichcat + '"> <h2>' + whichcat + '</h2><span class="cat1">0</span>';
+        $(".catshow").html(elem);
+
+        $('.catshow').on('click', 'img', function(num) {
+            var count = $(".catshow span").text();
+            count = parseInt(count) + 1;
+            $(".catshow span").text(count);
+        });
+
+    });
 
 
-    catShow();
     </script>
 </body>
 
