@@ -4,93 +4,60 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Examples</title>
+    <title>cat click</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
     <style>
-    #cat-click {
-        width: 20%;
-        float: left;
-    }
-
-    #cat-click div {
-        width: 100%;
-        display: block;
-        background: green;
-        text-align: center;
-        margin: 4% 0;
-    }
-
-    #cat-click div:hover {
-        cursor: pointer;
-    }
-
-    .catshow {
-        width: 40%;
-        float: left;
-        margin-left: 10%;
-    }
-
-    img {
-        width: 100%;
-        height: 250px;
-        /* margin: 12px; */
-        display: inline;
-        cursor: pointer;
-    }
-
-    h2 {
-        width: 100%;
-    }
-
-    span {
-        width: 100%;
-        color: red;
-        font-weight: bold;
-    }
+#cat-list{width:20%;float:left;}
+#cat-list div{width:100%;display:block;background:green;text-align:center;margin:4% 0;}
+#cat-list .red-bg{background:red;}
+#cat-list div:hover{cursor:pointer;}
+.catshow{width:30%;float:left;margin-left:10%;}
+img{width:100%;height:auto;display:inline;cursor:pointer;}
+h2{width:100%;}
+span{width:100%;color:red;font-weight:bold;}
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="cat-click">
-        <!-- <div><img class="cat1" src="cat1.jpg" alt="cat1" title="cat1"> <h2></h2><span></span></div> -->
-<!--         <div class="cat1">cat1</div>
-        <div class="cat2">cat2</div>
-        <div class="cat3">cat3</div>
-        <div class="cat3">cat4</div>
-        <div class="cat3">cat5</div> -->
+    <div id="cat-list">
     </div>
     <div class="catshow">
     </div>
     <script>
     var cats = $(".catshow");
-    var catNO = $("#cat-click");
+    var catNO = $("#cat-list");
+    // click the cats name
+    $("#cat-list").on('click', 'div', function() {
+        $(this).siblings().removeClass('red-bg');
+        $(this).addClass('red-bg');
+        e = $(this).text();
+        catShow(e);
+    });
+    // click the cats name
+    $('.catshow').on('click', 'img', function(num) {
+        var count = $(".catshow span").text();
+        count = parseInt(count) + 1;
+        $(".catshow span").text(count);
+    });
 
-    function catNOlist(){
+    // show all the cats name list
+    function catAllist() {
         for (var i = 1; i < 6; i++) {
             catNO.append('<div class="cat' + [i] + '">cat' + i + '</div>')
         }
     }
-    catNOlist();
-
-    $("#cat-click").on('click', 'div', function() {
-        var whichcat = $(this).text();
-        //var s =0;
+    catAllist();
+    //  show single cats image and name and click counts
+    function catShow(e) {
         var num = 0;
-        elem = '<img src="' + whichcat + '.jpg" alt="' + whichcat + '" title="' + whichcat + '"> <h2>' + whichcat + '</h2><span class="cat1">0</span>';
+        //var whichcat = $(this).text();
+        elem = '<h2>' + e + '</h2><span class="' + e + '">0</span><img src="' + e + '.jpg" alt="' + e + '" title="' + e + '"> ';
         $(".catshow").html(elem);
-
-        $('.catshow').on('click', 'img', function(num) {
-            var count = $(".catshow span").text();
-            count = parseInt(count) + 1;
-            $(".catshow span").text(count);
-        });
-
-    });
-
-
+    }
+    catShow('cat1');
     </script>
 </body>
 
