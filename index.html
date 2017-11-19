@@ -9,14 +9,49 @@
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
     <style>
-#cat-list{width:20%;float:left;}
-#cat-list div{width:100%;display:block;background:green;text-align:center;margin:4% 0;}
-#cat-list .red-bg{background:red;}
-#cat-list div:hover{cursor:pointer;}
-.catshow{width:30%;float:left;margin-left:10%;}
-img{width:100%;height:auto;display:inline;cursor:pointer;}
-h2{width:100%;}
-span{width:100%;color:red;font-weight:bold;}
+    #cat-list {
+        width: 20%;
+        float: left;
+    }
+
+    #cat-list div {
+        width: 100%;
+        display: block;
+        background: green;
+        text-align: center;
+        margin: 4% 0;
+    }
+
+    #cat-list .red-bg {
+        background: red;
+    }
+
+    #cat-list div:hover {
+        cursor: pointer;
+    }
+
+    .catshow {
+        width: 30%;
+        float: left;
+        margin-left: 10%;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        display: inline;
+        cursor: pointer;
+    }
+
+    h2 {
+        width: 100%;
+    }
+
+    span {
+        width: 100%;
+        color: red;
+        font-weight: bold;
+    }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 </head>
@@ -27,37 +62,113 @@ span{width:100%;color:red;font-weight:bold;}
     <div class="catshow">
     </div>
     <script>
-    var cats = $(".catshow");
-    var catNO = $("#cat-list");
-    // click the cats name
-    $("#cat-list").on('click', 'div', function() {
-        $(this).siblings().removeClass('red-bg');
-        $(this).addClass('red-bg');
-        e = $(this).text();
-        catShow(e);
-    });
-    // click the cats name
-    $('.catshow').on('click', 'img', function(num) {
-        var count = $(".catshow span").text();
-        count = parseInt(count) + 1;
-        $(".catshow span").text(count);
-    });
+    $(function() {
 
-    // show all the cats name list
-    function catAllist() {
-        for (var i = 1; i < 6; i++) {
-            catNO.append('<div class="cat' + [i] + '">cat' + i + '</div>')
-        }
-    }
-    catAllist();
-    //  show single cats image and name and click counts
-    function catShow(e) {
-        var num = 0;
-        //var whichcat = $(this).text();
-        elem = '<h2>' + e + '</h2><span class="' + e + '">0</span><img src="' + e + '.jpg" alt="' + e + '" title="' + e + '"> ';
-        $(".catshow").html(elem);
-    }
-    catShow('cat1');
+        //catClick[ catID:'cat1': catCount, catID:'cat2': catCount, catID:'cat3': catCount,]
+
+        var data = {
+            catList: [{
+                    clickCount: 0,
+                    name: 'cat1',
+                },
+                {
+                    clickCount: 0,
+                    name: 'cat2',
+                },
+                {
+                    clickCount: 0,
+                    name: 'cat3',
+                },
+                {
+                    clickCount: 0,
+                    name: 'cat4',
+                },
+                {
+                    clickCount: 0,
+                    name: 'cat5',
+                }
+            ]
+        };
+        console.log(data.catList);
+
+        var cats = $(".catshow");
+        var catTag = $("#cat-list");
+
+        var octopus = {
+
+            clickCount: function(e) {
+
+                for (var i = 0; i < data.catList.length; i++) {
+                    if (data.catList[i].name == e) {
+                        data.catList[i].clickCount++;
+                        var count = data.catList[i].clickCount;
+                        view.renderSpan(count);
+                        return;
+                    }
+                }
+
+            },
+            initCount: function(e) {
+                for (var i = 0; i < data.catList.length; i++) {
+                    if (data.catList[i].name == e) {
+                        var count = data.catList[i].clickCount;
+                        view.renderSpan(count);
+                        return;
+                    }
+                }
+
+            },
+            init: function() {
+                view.init();
+                view.render('cat1')
+            }
+
+        };
+
+        var view = {
+
+            init: function() {
+                for (var i = 1; i < 6; i++) {
+
+                    catTag.append('<div id="cat' + [i] + '" >cat' + i + '</div>')
+                }
+
+                $("#cat-list").on('click', 'div', function() {
+
+                    $(this).siblings().removeClass('red-bg');
+                    $(this).addClass('red-bg');
+                    var e = $(this).text();
+
+                    view.render(e);
+                    octopus.initCount(e);
+
+                });
+
+                $(".catshow").on('click', 'img', function() {
+                    var e = $(".catshow h2").text()
+                    octopus.clickCount(e);
+
+                });
+
+            },
+
+            render: function(e) {
+
+                elem = '<div class="' + e + '"><h2>' + e + '</h2><span class="' + e + '"></span><img src="' + e + '.jpg" alt="' + e + '" title="' + e + '"/></div>';
+
+                $(".catshow").html(elem);
+            },
+            renderSpan: function(id) {
+
+                $(".catshow span").text(id);
+            }
+        };
+
+        octopus.init();
+
+    }());
+
+    // catShow('cat1');
     </script>
 </body>
 
